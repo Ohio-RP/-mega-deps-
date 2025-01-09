@@ -23,7 +23,7 @@ tasks:
 # Run Database SQL
   - action: connect_database
   - action: query_database
-    file: ./temp/vorp_txAdminRecipe/sql.sql
+    file: ./temp/vorp_txAdminRecipe/service.sql
     
 # Move the icon to the root
   - action: move_path
