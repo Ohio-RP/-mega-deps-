@@ -1,0 +1,483 @@
+$engine: 3
+$onesync: on
+$steamRequired: true
+name: Ohio
+author: OhioRP
+description: VorpCore Official txAdmin recipe! This will set up a base vorp official server.
+
+variables:
+    steam_webApiKey: "B19B8489ECCFE0B497584AC24029B821"
+
+tasks:
+
+# Recipe Specific server.cfg files
+  - action: download_github
+    src: https://github.com/VORPCORE/VORP_txAdmin
+    ref: main
+    dest: ./temp/vorp_txAdminRecipe
+  
+  - action: move_path
+    src: ./temp/vorp_txAdminRecipe/server.cfg
+    dest: ./server.cfg
+  
+# Run Database SQL
+  - action: connect_database
+  - action: query_database
+    file: ./temp/vorp_txAdminRecipe/MariaDB.sql
+    
+# Move the icon to the root
+  - action: move_path
+    src: ./temp/vorp_txAdminRecipe/icon.png
+    dest: ./icon.png
+
+# Download default CFX resources
+  - action: download_github
+    src: https://github.com/outsider31000/cfx-server-data
+    ref: master
+    subpath: resources
+    dest: ./resources/
+  - action: remove_path
+    path: ./resources/[CFX]/[gameplay]/chat
+
+# Download vorp core
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_core-lua
+    ref: main
+    dest: ./temp/[VORP]/vorp_core
+
+# Download vorp character
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_character-lua
+    ref: main
+    dest: ./temp/[VORP]/vorp_character
+
+# Download vorp inventory 
+  - action: download_github
+    src: https://github.com/VLAB-STUDIO/vorp_inventory
+    ref: main
+    dest: ./temp/[VORP]/vorp_inventory
+
+# Download vorp inventory https://github.com/VLAB-STUDIO/vorp_inventory.git
+#  - action: download_github
+#    src: https://github.com/VORPCORE/vorp_inventory-lua
+#    ref: main
+#    dest: ./temp/[VORP]/vorp_inventory
+
+
+# Download vorp inputs
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_inputs-lua
+    ref: main
+    dest: ./temp/[VORP]/vorp_inputs
+ 
+# Download vorp progressbar
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_progressbar
+    ref: main
+    dest: ./temp/[VORP]/vorp_progressbar
+
+# Download vorp banking
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_banking
+    ref: main
+    dest: ./temp/[VORP]/vorp_banking
+
+# Download vorp herbs
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_herbs
+    ref: main
+    dest: ./temp/[VORP]/vorp_herbs
+  
+# Download vorp admin
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_admin
+    ref: main
+    dest: ./temp/[VORP]/vorp_admin
+
+# Download vorp hunting
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_hunting
+    ref: main
+    dest: ./temp/[VORP]/vorp_hunting
+
+# Download vorp fishing
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_fishing-lua
+    ref: main
+    dest: ./temp/[VORP]/vorp_fishing
+
+# Download vorp outlaws
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_outlaws
+    ref: main
+    dest: ./temp/[VORP]/vorp_outlaws
+
+# Download vorp crawfish
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_crawfish
+    ref: main
+    dest: ./temp/[VORP]/vorp_crawfish
+
+
+
+# Download vorp postman
+  - action: download_github
+    src: https://github.com/VORPCORE/VORP-PostMan
+    dest: ./tmp/vorp_postman
+
+# Move the postman to the correct location
+  - action: move_path
+    src: ./tmp/vorp_postman/VORP-PostMan[Server-Client]/build/vorp_postman
+    dest: ./temp/[VORP]/vorp_postman
+
+# Remove folder
+  - action: remove_path
+    path: ./tmp/vorp_postman
+
+# Download vorp barbershop
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_barbershop_lua
+    ref: main
+    dest: ./temp/[VORP]/vorp_barbershop
+
+
+# Download vorp utils
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_utils
+    ref: main
+    dest: ./temp/[VORP]/vorp_utils
+
+# Download vorp menu
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_menu
+    ref: main
+    dest: ./temp/[VORP]/vorp_menu
+
+# Download vorp walkanim
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_walkanim
+    ref: main
+    dest: ./temp/[VORP]/vorp_walkanim
+
+# Download oxmysql
+  - action: download_file
+    path: ./tmp/files/oxmysql.zip
+    url: https://github.com/overextended/oxmysql/releases/latest/download/oxmysql.zip
+  - action: unzip
+    dest: ./resources/[standalone]
+    src: ./tmp/files/oxmysql.zip
+
+# Download pma-voice
+  - action: download_github
+    src: https://github.com/AvarianKnight/pma-voice
+    ref: main
+    dest: ./resources/[standalone]/pma-voice
+
+# Download pma-display
+  - action: download_github
+    src: https://github.com/outsider31000/pma-display
+    ref: main
+    dest: ./resources/[standalone]/pma-display
+
+# Download weathersync
+  - action: download_github
+    src: https://github.com/kibook/weathersync
+    ref: master
+    dest: ./resources/[standalone]/weathersync
+
+# Download redm ipls
+  - action: download_github
+    src: https://github.com/outsider31000/redm-ipls
+    ref: main
+    dest: ./resources/[standalone]/redm-ipls
+
+# Download syn minigame
+  - action: download_github
+    src: https://github.com/outsider31000/syn-minigame
+    ref: main
+    dest: ./resources/[standalone]/syn_minigame
+
+# Download moonshine interiors
+  - action: download_github
+    src: https://github.com/outsider31000/moonshine_interiors
+    ref: main
+    dest: ./resources/[standalone]/moonshine_interiors
+
+# Download Polyzone
+  - action: download_github
+    src: https://github.com/outsider31000/PolyZone
+    ref: main
+    dest: ./resources/[standalone]/PolyZone
+
+# Download lockpick
+  - action: download_github
+    src: https://github.com/outsider31000/lockpick
+    ref: main
+    dest: ./resources/[standalone]/lockpick
+
+# Download Leon Spooner 
+  - action: download_github
+    src: https://github.com/LeonhardGottberg/spooner
+    ref: main
+    dest: ./resources/[standalone]/spooner
+
+# Download qadr-safe
+  - action: download_github
+    src: https://github.com/GlitchOo/qadr-safe
+    ref: main
+    dest: ./resources/[standalone]/spooner
+	
+# Xakra Scripts
+
+# Download xakra_fireworks
+  - action: download_github
+    src: https://github.com/XakraD/xakra_fireworks
+    ref: main
+    dest: ./resources/[XakraD]/xakra_fireworks
+
+# Download xakra_fireworks
+  - action: download_github
+    src: https://github.com/XakraD/xakra_fireworks
+    ref: main
+    dest: ./resources/[XakraD]/xakra_fireworks
+
+# Download xakra_backpacks
+  - action: download_github
+    src: https://github.com/XakraD/xakra_backpacks
+    ref: main
+    dest: ./resources/[XakraD]/xakra_backpacks
+
+# Download xakra_steal
+  - action: download_github
+    src: https://github.com/XakraD/xakra_steal
+    ref: main
+    dest: ./resources/[XakraD]/xakra_steal
+
+# Download xakra_reloadspeed
+  - action: download_github
+    src: https://github.com/XakraD/xakra_reloadspeed
+    ref: main
+    dest: ./resources/[XakraD]/xakra_reloadspeed
+
+# Download xakra_waterpump
+  - action: download_github
+    src: https://github.com/XakraD/xakra_waterpump
+    ref: main
+    dest: ./resources/[XakraD]/xakra_waterpump
+
+# Download xakra_animations
+  - action: download_github
+    src: https://github.com/XakraD/xakra_animations
+    ref: main
+    dest: ./resources/[XakraD]/xakra_animations
+
+# Download xakra_utils
+  - action: download_github
+    src: https://github.com/XakraD/xakra_utils
+    ref: main
+    dest: ./resources/[XakraD]/xakra_utils
+
+# Download xakra_teleports
+  - action: download_github
+    src: https://github.com/XakraD/xakra_teleports
+    ref: main
+    dest: ./resources/[XakraD]/xakra_teleports
+
+# Download xakra_outfits
+  - action: download_github
+    src: https://github.com/XakraD/xakra_outfits
+    ref: main
+    dest: ./resources/[XakraD]/xakra_outfits
+
+# Download xakra_peyote
+  - action: download_github
+    src: https://github.com/XakraD/xakra_peyote
+    ref: main
+    dest: ./resources/[XakraD]/xakra_peyote
+
+# Download xakra_hitmarker
+  - action: download_github
+    src: https://github.com/XakraD/xakra_hitmarker
+    ref: main
+    dest: ./resources/[XakraD]/xakra_hitmarker
+
+# Download xakra_drugs
+  - action: download_github
+    src: https://github.com/XakraD/xakra_drugs
+    ref: main
+    dest: ./resources/[XakraD]/xakra_drugs
+
+# Download xakra_pocketwatch
+  - action: download_github
+    src: https://github.com/XakraD/xakra_pocketwatch
+    ref: main
+    dest: ./resources/[XakraD]/xakra_pocketwatch
+
+# Download xakra_scenarios
+  - action: download_github
+    src: https://github.com/XakraD/xakra_scenarios
+    ref: main
+    dest: ./resources/[XakraD]/xakra_scenarios
+# Download xakra_pomade
+  - action: download_github
+    src: https://github.com/XakraD/xakra_pomade
+    ref: main
+    dest: ./resources/[XakraD]/xakra_pomade
+
+# Download xakra_flourishes
+  - action: download_github
+    src: https://github.com/XakraD/xakra_flourishes
+    ref: main
+    dest: ./resources/[XakraD]/xakra_flourishes
+
+# Download xakra_npcs
+  - action: download_github
+    src: https://github.com/XakraD/xakra_npcs
+    ref: main
+    dest: ./resources/[XakraD]/xakra_npcs
+
+# BCC - Scripts
+
+# Download bcc-water
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-water
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-water
+
+# Download bcc-guarma
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-guarma
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-guarma
+
+# Download bcc-utils
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-utils
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-utils
+
+# Download bcc-boats
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-boats
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-boats
+
+# Download bcc-doorlocks
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-doorlocks
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-doorlocks
+
+# Download bcc-nazar
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-nazar
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-nazar
+
+# Download bcc-vehiclefixes
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-vehiclefixes
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-vehiclefixes
+
+# Download bcc-oil
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-oil
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-oil
+
+# Download bcc-camp
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-camp
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-camp
+
+# Download bcc-goldpanning
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-goldpanning
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-goldpanning
+
+# Download bcc-legendaries
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-legendaries
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-legendaries
+
+# Download bcc-train
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-train
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-train
+
+# Download bcc-scene
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-scene
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-scene
+
+# Download bcc-pets
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-pets
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-pets
+
+# Download bcc-loadscreen
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-loadscreen
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-loadscreen
+
+# Download bcc-anticheat
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-anticheat
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-anticheat
+
+# Download bcc-posse
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-posse
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-posse
+
+# Download bcc-blindfold
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-blindfold
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-blindfold
+
+# Download bcc-loadscreen-helper
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-loadscreen-helper
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-loadscreen-helper
+
+# Download bcc-crypt
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-crypt
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-crypt
+
+# Download bcc-acidtrip
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-acidtrip
+    ref: main
+    dest: ./resources/[BryceCanyonCounty]/bcc-acidtrip
+
+
+	
+# Remove Old Chat
+  - action: remove_path
+    path: ./resources/[cfx-default]/[gameplay]/chat
+
+# Move all vorp resources and files to root for txadmin
+  - action: move_path
+    src: ./temp/[VORP]
+    dest: ./resources/[VORP]
+
+
+# Clean up temporary files
+  - action: remove_path
+    path: ./temp
+	
+	
