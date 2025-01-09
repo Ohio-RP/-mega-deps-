@@ -219,13 +219,13 @@ tasks:
 # Download Leon Spooner 
   - action: download_github
     src: https://github.com/LeonhardGottberg/spooner
-    ref: main
+    ref: master
     dest: ./resources/[standalone]/spooner
 
 # Download qadr-safe
   - action: download_github
     src: https://github.com/GlitchOo/qadr-safe
-    ref: main
+    ref: master
     dest: ./resources/[standalone]/spooner
 	
 # Xakra Scripts
