@@ -12,7 +12,7 @@ tasks:
 
 # Recipe Specific server.cfg files
   - action: download_github
-    src: https://github.com/Ohio-RP/-mega-deps-.git
+    src: https://github.com/Ohio-RP/-mega-deps-
     ref: main
     dest: ./temp/vorp_txAdminRecipe
   
