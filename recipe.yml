@@ -6,13 +6,13 @@ author: OhioRP
 description: VorpCore Official txAdmin recipe! This will set up a base vorp official server.
 
 variables:
-    steam_webApiKey: "B19B8489ECCFE0B497584AC24029B821"
+    steam_webApiKey: ""
 
 tasks:
 
 # Recipe Specific server.cfg files
   - action: download_github
-    src: https://github.com/VORPCORE/VORP_txAdmin
+    src: https://github.com/Ohio-RP/-mega-deps-.git
     ref: main
     dest: ./temp/vorp_txAdminRecipe
   
@@ -23,7 +23,7 @@ tasks:
 # Run Database SQL
   - action: connect_database
   - action: query_database
-    file: ./temp/vorp_txAdminRecipe/MariaDB.sql
+    file: ./temp/vorp_txAdminRecipe/sql.sql
     
 # Move the icon to the root
   - action: move_path
@@ -167,6 +167,7 @@ tasks:
     dest: ./resources/[standalone]
     src: ./tmp/files/oxmysql.zip
 
+
 # Download pma-voice
   - action: download_github
     src: https://github.com/AvarianKnight/pma-voice
@@ -218,13 +219,13 @@ tasks:
 # Download Leon Spooner 
   - action: download_github
     src: https://github.com/LeonhardGottberg/spooner
-    ref: master
+    ref: main
     dest: ./resources/[standalone]/spooner
 
 # Download qadr-safe
   - action: download_github
     src: https://github.com/GlitchOo/qadr-safe
-    ref: master
+    ref: main
     dest: ./resources/[standalone]/spooner
 	
 # Xakra Scripts
@@ -404,11 +405,13 @@ tasks:
     ref: main
     dest: ./resources/[BryceCanyonCounty]/bcc-legendaries
 
-# Download bcc-train
-  - action: download_github
-    src: https://github.com/BryceCanyonCounty/bcc-train
-    ref: main
+# Download Bcc-Trains
+  - action: download_file
+    path: ./tmp/files/bcc-train.zip
+    url: https://github.com/BryceCanyonCounty/bcc-train/releases/download/1.1.5/bcc-train.zip
+  - action: unzip
     dest: ./resources/[BryceCanyonCounty]/bcc-train
+    src: ./tmp/files/bcc-train.zip
 
 # Download bcc-scene
   - action: download_github
@@ -463,7 +466,23 @@ tasks:
     src: https://github.com/BryceCanyonCounty/bcc-acidtrip
     ref: main
     dest: ./resources/[BryceCanyonCounty]/bcc-acidtrip
+    
+# Download bcc-minigames
+  - action: download_file
+    path: ./tmp/files/bcc-minigames.zip
+    url: https://github.com/BryceCanyonCounty/bcc-minigames/releases/download/1.0.7/bcc-minigames.zip
+  - action: unzip
+    dest: ./resources/[BryceCanyonCounty]/bcc-minigames
+    src: ./tmp/files/bcc-minigames.zip
 
+# Download bcc-minigames
+  - action: download_file
+    path: ./tmp/files/feather-menu.zip
+    url: https://github.com/FeatherFramework/feather-menu/releases/download/1.2.0/feather-menu.zip
+  - action: unzip
+    dest: ./resources/[BryceCanyonCounty]/feather-menu
+    src: ./tmp/files/feather-menu.zip  
+    
 
 	
 # Remove Old Chat
@@ -479,5 +498,4 @@ tasks:
 # Clean up temporary files
   - action: remove_path
     path: ./temp
-	
 	
